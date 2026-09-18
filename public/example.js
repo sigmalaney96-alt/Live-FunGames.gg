@@ -1,32 +1,19 @@
 const iframeWindow = document.getElementById("iframeWindow");
-const splashScreen = document.getElementById("splashScreen");
 const requestedSite = new URLSearchParams(window.location.search).get("r");
-let targetUrl = null;
 
 if (requestedSite && requestedSite.trim()) {
     let url = requestedSite.trim();
-    if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+
+    // Allow both ?r=example.com and ?r=https://example.com.
+    if (!/^https?:\/\//i.test(url)) {
+        url = `https://${url}`;
+    }
 
     try {
         const target = new URL(url);
-        if (target.protocol === "http:" || target.protocol === "https:") {
-            targetUrl = target.href;
-        }
+        iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(target.href);
     } catch {
-        targetUrl = null;
+        // Do not navigate when the r parameter is not a valid URL.
+        iframeWindow.removeAttribute("src");
     }
-}
-
-function loadTargetSite() {
-    if (targetUrl) {
-        iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
-    }
-}
-
-if (targetUrl) {
-    splashScreen.hidden = false;
-    window.setTimeout(() => {
-        splashScreen.hidden = true;
-        loadTargetSite();
-    }, 3000);
 }

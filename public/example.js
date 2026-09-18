@@ -1,6 +1,5 @@
 const iframeWindow = document.getElementById("iframeWindow");
-const welcomePopup = document.getElementById("welcomePopup");
-const closePopup = document.getElementById("closePopup");
+const splashScreen = document.getElementById("splashScreen");
 const requestedSite = new URLSearchParams(window.location.search).get("r");
 let targetUrl = null;
 
@@ -28,12 +27,11 @@ function loadTargetSite() {
 }
 
 if (targetUrl) {
-    // Keep the target out of the iframe until the user dismisses the popup.
-    welcomePopup.hidden = false;
-    closePopup.focus();
-}
+    // Show the branding splash before loading the requested proxy target.
+    splashScreen.hidden = false;
 
-closePopup.addEventListener("click", () => {
-    welcomePopup.hidden = true;
-    loadTargetSite();
-});
+    window.setTimeout(() => {
+        splashScreen.hidden = true;
+        loadTargetSite();
+    }, 3000);
+}

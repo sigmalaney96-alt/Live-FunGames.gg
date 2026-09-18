@@ -17,48 +17,25 @@ body {
     background-color: #fff;
 }
 
-.popupBackdrop {
+.splashScreen {
     position: fixed;
     inset: 0;
     z-index: 10;
     display: grid;
     place-items: center;
-    background: rgba(0, 0, 0, 0.55);
+    background: #f47b20;
 }
 
-.popupBackdrop[hidden] {
+.splashScreen[hidden] {
     display: none;
 }
 
-.popupCard {
-    width: min(90vw, 420px);
-    box-sizing: border-box;
-    padding: 2rem;
-    border-radius: 12px;
+.splashTitle {
     color: #fff;
-    background: #f47b20;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    font-family: "Amatic SC", cursive;
+    font-size: clamp(6rem, 22vw, 20rem);
+    font-weight: 700;
+    line-height: 0.85;
     text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-.popupCard p {
-    margin: 0 0 1.5rem;
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-
-#closePopup {
-    padding: 0.7rem 2rem;
-    border: 0;
-    border-radius: 6px;
-    color: #f47b20;
-    background: #fff;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-#closePopup:hover {
-    background: #fff3e8;
+    white-space: nowrap;
 }

@@ -18,16 +18,16 @@
         }
         </script>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="example.css">
     </head>
     <body>
         <iframe id="iframeWindow" class="iframeWindow" title="Proxied website"></iframe>
 
-        <div id="welcomePopup" class="popupBackdrop" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
-            <div class="popupCard">
-                <p id="welcomeTitle">Thank you for using FunGames.gg</p>
-                <button id="closePopup" type="button">Close</button>
-            </div>
+        <div id="splashScreen" class="splashScreen" role="status" aria-live="polite" hidden>
+            <div class="splashTitle">FunGames.gg</div>
         </div>
 
         <script src="example.js"></script>

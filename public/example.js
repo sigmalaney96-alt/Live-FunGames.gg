@@ -1,5 +1,8 @@
 const iframeWindow = document.getElementById("iframeWindow");
+const welcomePopup = document.getElementById("welcomePopup");
+const closePopup = document.getElementById("closePopup");
 const requestedSite = new URLSearchParams(window.location.search).get("r");
+let targetUrl = null;
 
 if (requestedSite && requestedSite.trim()) {
     let url = requestedSite.trim();
@@ -11,9 +14,26 @@ if (requestedSite && requestedSite.trim()) {
 
     try {
         const target = new URL(url);
-        iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(target.href);
+        if (target.protocol === "http:" || target.protocol === "https:") {
+            targetUrl = target.href;
+        }
     } catch {
-        // Do not navigate when the r parameter is not a valid URL.
-        iframeWindow.removeAttribute("src");
+        targetUrl = null;
     }
 }
+
+function loadTargetSite() {
+    if (!targetUrl) return;
+    iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
+}
+
+if (targetUrl) {
+    // Keep the target out of the iframe until the user dismisses the popup.
+    welcomePopup.hidden = false;
+    closePopup.focus();
+}
+
+closePopup.addEventListener("click", () => {
+    welcomePopup.hidden = true;
+    loadTargetSite();
+});
